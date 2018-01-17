@@ -19,22 +19,19 @@ namespace Web.Application.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            using (var Lista = new Personas())
-            {
-                ListPersona = ListPersona ?? Lista.Persona;
-                ViewBag.List = ListPersona;
-            }
+            var Personas = new Personas();
+
+            ListPersona = ListPersona ?? Personas.ListPersonas;
+            ViewBag.List = ListPersona;
 
             return View();
         }
 
         [HttpPost]
-        public PartialViewResult ListTemp()
+        public PartialViewResult List()
         {
-            using (var Lista = new Personas())
-            {
-                ListPersona = ListPersona ?? Lista.Persona;
-            }
+            var Personas = new Personas();
+            ListPersona = ListPersona ?? Personas.ListPersonas;
 
             return PartialView(ListPersona);
         }
@@ -51,11 +48,16 @@ namespace Web.Application.Controllers
             JSONResponse = new JsonResponse();
             if (ModelState.IsValid)
             {
-                using (var List = new Personas())
+                try
                 {
-                    List.Add(Persona);
-                    ListPersona = List.Persona;
+                    Persona.Id = ListPersona.Max(x => x.Id) + 1;
+                    ListPersona.Add(Persona);
                 }
+                catch (Exception)
+                {
+                    Persona.Id = 0;
+                }
+
                 if (Persona.Id > 0)
                 {
                     JSONResponse.IsSuccess = true;
@@ -85,24 +87,14 @@ namespace Web.Application.Controllers
         [HttpGet]
         public PartialViewResult Details(long id)
         {
-            Persona Persona;
-            using (var List = new Personas())
-            {
-                Persona = ListPersona.Single(x => x.Id == id);
-            }
-
+            Persona Persona = ListPersona.Single(x => x.Id == id);
             return PartialView(Persona);
         }
 
         [HttpGet]
         public PartialViewResult Delete(long id)
         {
-            Persona Persona;
-            using (var List = new Personas())
-            {
-                Persona = ListPersona.Single(x => x.Id == id);
-            }
-
+            Persona Persona = ListPersona.Single(x => x.Id == id);
             return PartialView(Persona);
         }
 
@@ -111,11 +103,15 @@ namespace Web.Application.Controllers
         {
             JSONResponse = new JsonResponse();
             bool IsSuccess = false;
-            using (var List = new Personas())
+            try
             {
-                IsSuccess = List.Remove(id);
-                ListPersona = List.Persona;
+                IsSuccess = ListPersona.Remove(ListPersona.Single(x => x.Id == id));
             }
+            catch (Exception)
+            {
+                IsSuccess = false;
+            }
+            
             if (IsSuccess)
             {
                 JSONResponse.IsSuccess = true;
@@ -138,12 +134,7 @@ namespace Web.Application.Controllers
         [HttpGet]
         public PartialViewResult Edit(long id)
         {
-            Persona Persona;
-            using (var List = new Personas())
-            {
-                Persona = ListPersona.Single(x => x.Id == id);
-            }
-
+            Persona Persona = ListPersona.Single(x => x.Id == id);
             return PartialView(Persona);
         }
 
@@ -154,11 +145,20 @@ namespace Web.Application.Controllers
             if (ModelState.IsValid)
             {
                 bool IsSuccess = false;
-                using (var List = new Personas())
+                try
                 {
-                    IsSuccess = List.Edit(Persona);
-                    ListPersona = List.Persona;
+                    ListPersona.Single(x => x.Id == Persona.Id).Apellido = Persona.Apellido;
+                    ListPersona.Single(x => x.Id == Persona.Id).Correo = Persona.Correo;
+                    ListPersona.Single(x => x.Id == Persona.Id).Edad = Persona.Edad;
+                    ListPersona.Single(x => x.Id == Persona.Id).Estado = Persona.Estado;
+                    ListPersona.Single(x => x.Id == Persona.Id).Nombre = Persona.Nombre;
+                    IsSuccess = true;
                 }
+                catch (Exception)
+                {
+                    IsSuccess = false;
+                }
+                
                 if (IsSuccess)
                 {
                     JSONResponse.IsSuccess = true;
@@ -178,17 +178,18 @@ namespace Web.Application.Controllers
                         UpdateElementId = "DivForList",
                         Async = false,
                         Method = "POST",
-                        Url = Url.Action("List", "Persona", null)
+                        Url = Url.Action("List", "PersonaTemp", null)
                     });
                 }
             }
+
             return Json(JSONResponse);
         }
 
         [HttpGet]
         public JsonResult CorreoVal(string Correo)
         {
-            if (!Correo.Contains(" ") && Correo.Contains("@"))
+            if (Correo.Contains("@"))
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
             }

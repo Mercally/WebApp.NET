@@ -166,7 +166,7 @@ namespace Web.Application.Controllers
         [HttpGet]
         public JsonResult CorreoVal(string Correo)
         {
-            if (Correo.Contains("gmail"))
+            if (Correo.Contains("@"))
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
             }

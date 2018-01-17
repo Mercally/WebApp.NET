@@ -308,7 +308,7 @@
     <Content Include="Views\PersonaTemp\Details.cshtml" />
     <Content Include="Views\PersonaTemp\Edit.cshtml" />
     <Content Include="Views\PersonaTemp\Index.cshtml" />
-    <Content Include="Views\PersonaTemp\ListTemp.cshtml" />
+    <Content Include="Views\PersonaTemp\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

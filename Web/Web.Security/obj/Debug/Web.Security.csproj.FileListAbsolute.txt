@@ -10,3 +10,9 @@ C:\Source\WebAppDemo\Web\Web.Security\obj\Debug\Web.Security.csprojResolveAssemb
 C:\Source\WebAppDemo\Web\Web.Security\obj\Debug\Web.Security.csproj.CoreCompileInputs.cache
 C:\Source\WebAppDemo\Web\Web.Security\obj\Debug\Web.Security.dll
 C:\Source\WebAppDemo\Web\Web.Security\obj\Debug\Web.Security.pdb
+C:\Source\WebAppDemo\WebApp.NET\Web\Web.Security\bin\Debug\Web.Security.dll
+C:\Source\WebAppDemo\WebApp.NET\Web\Web.Security\bin\Debug\Web.Security.pdb
+C:\Source\WebAppDemo\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.csprojResolveAssemblyReference.cache
+C:\Source\WebAppDemo\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.csproj.CoreCompileInputs.cache
+C:\Source\WebAppDemo\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.dll
+C:\Source\WebAppDemo\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.pdb

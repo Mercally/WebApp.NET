@@ -9,7 +9,7 @@
 <h2>Personas</h2>
 <button type="button" onclick="PartialAction('@Url.Action("Add", "PersonaTemp")', 'DivForAdd', 'AddModal');" class="btn btn-primary">Create</button>
 <div id="DivForList">
-    @Html.Partial("ListTemp", ViewBag.List as List<Persona>)
+    @Html.Partial("List", ViewBag.List as List<Persona>)
 </div>
 
 <!-- Modal Edit -->

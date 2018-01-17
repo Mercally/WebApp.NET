@@ -7,19 +7,13 @@ using System.Web;
 
 namespace Web.Application.Data
 {
-    public class Personas : IDisposable, IList<Persona>
+    public class Personas
     {
-        public List<Persona> Persona { get; set; }
-
-        public int Count => Persona.Count;
-
-        public bool IsReadOnly => false;
-
-        public Persona this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public List<Persona> ListPersonas { get; set; }
 
         public Personas()
         {
-            Persona = new List<Persona>()
+            ListPersonas = new List<Persona>()
             {
             new Persona(){ Apellido = "Acevedo Manríquez", Correo = "amanriquez@gmail.com", Edad = 19, Estado = true, Id = 1, Nombre = "María Mireya" },
             new Persona(){ Apellido = "Acevedo Mejía", Correo = "qmejia@hotmail.com", Edad = 54, Estado = true, Id = 2, Nombre = "Enrique" },
@@ -39,107 +33,6 @@ namespace Web.Application.Data
             new Persona(){ Apellido = "Del Toro Arreola", Correo = "del_toro_arre@hotmail.es", Edad = 39, Estado = true, Id = 16, Nombre = "Norma" },
             new Persona(){ Apellido = "Díaz Cruz", Correo = "diassscruzzz@gmail.com", Edad = 45, Estado = true, Id = 17, Nombre = "Héctor Federico" }
             };
-        }
-
-        public bool Edit(Persona item)
-        {
-            try
-            {
-                if (item.Id < 1)
-                {
-                    return false;
-                }
-
-                Persona.Single(x => x.Id == item.Id).Apellido = item.Apellido;
-                Persona.Single(x => x.Id == item.Id).Correo = item.Correo;
-                Persona.Single(x => x.Id == item.Id).Edad = item.Edad;
-                Persona.Single(x => x.Id == item.Id).Estado = item.Estado;
-                Persona.Single(x => x.Id == item.Id).Nombre = item.Nombre;
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public void Dispose()
-        {
-
-        }
-
-        public int IndexOf(Persona item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(int index, Persona item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveAt(int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Add(Persona item)
-        {
-            try
-            {
-                long index = Persona.Max(x => x.Id) + 1;
-                item.Id = index;
-                Persona.Add(item);
-            }
-            catch (Exception)
-            {
-                item.Id = 0;
-            }
-        }
-
-        public void Clear()
-        {
-            Persona.Clear();
-        }
-
-        public bool Contains(Persona item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CopyTo(Persona[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(Persona item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(long Id)
-        {
-            try
-            {
-                return Persona.Remove(
-                    Persona.Single(x => x.Id == Id)
-                    );
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public IEnumerator<Persona> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
     }
 }

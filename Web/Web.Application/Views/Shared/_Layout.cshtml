@@ -61,9 +61,9 @@
                 }
                 if (Response != null) {
                     if (Response.ResponseId == 'Common') {
-                        if (Response.BtnSubmitId != null) {
-                            $('#' + Response.BtnSubmitId).button('reset');
-                        }
+                        //if (Response.BtnSubmitId != null) {
+                        //    $('#' + Response.BtnSubmitId).button('reset');
+                        //}
                         if (Response.IsSuccess) {
                             alert('¡Éxito! Datos guardados correctamente :)');
                             if (Response.IsRedirected) {
@@ -125,10 +125,10 @@
             Pace.on('hide', function () {
             });
 
-            $('.btn-submit').on('click', function () {
-                var $this = $(this);
-                $this.button('loading');
-            });
+            //$('.btn-submit').on('click', function () {
+            //    var $this = $(this);
+            //    $this.button('loading');
+            //});
         });
     </script>
     @RenderSection("Scripts", false)
