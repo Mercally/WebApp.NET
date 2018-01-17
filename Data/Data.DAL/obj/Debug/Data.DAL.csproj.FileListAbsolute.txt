@@ -1,0 +1,12 @@
+C:\Source\AdminTLE\Data\Data.DAL\bin\Debug\Data.DAL.dll
+C:\Source\AdminTLE\Data\Data.DAL\bin\Debug\Data.DAL.pdb
+C:\Source\AdminTLE\Data\Data.DAL\obj\Debug\Data.DAL.csproj.CoreCompileInputs.cache
+C:\Source\AdminTLE\Data\Data.DAL\obj\Debug\Data.DAL.dll
+C:\Source\AdminTLE\Data\Data.DAL\obj\Debug\Data.DAL.pdb
+C:\Source\AdminTLE\Data\Data.DAL\obj\Debug\Data.DAL.csprojResolveAssemblyReference.cache
+C:\Source\WebAppDemo\Data\Data.DAL\bin\Debug\Data.DAL.dll
+C:\Source\WebAppDemo\Data\Data.DAL\bin\Debug\Data.DAL.pdb
+C:\Source\WebAppDemo\Data\Data.DAL\obj\Debug\Data.DAL.csprojResolveAssemblyReference.cache
+C:\Source\WebAppDemo\Data\Data.DAL\obj\Debug\Data.DAL.csproj.CoreCompileInputs.cache
+C:\Source\WebAppDemo\Data\Data.DAL\obj\Debug\Data.DAL.dll
+C:\Source\WebAppDemo\Data\Data.DAL\obj\Debug\Data.DAL.pdb

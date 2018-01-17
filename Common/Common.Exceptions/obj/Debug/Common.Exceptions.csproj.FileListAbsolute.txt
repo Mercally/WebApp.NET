@@ -1,0 +1,12 @@
+C:\Source\AdminTLE\Common\Common.Exceptions\bin\Debug\Common.Exceptions.dll
+C:\Source\AdminTLE\Common\Common.Exceptions\bin\Debug\Common.Exceptions.pdb
+C:\Source\AdminTLE\Common\Common.Exceptions\obj\Debug\Common.Exceptions.csproj.CoreCompileInputs.cache
+C:\Source\AdminTLE\Common\Common.Exceptions\obj\Debug\Common.Exceptions.dll
+C:\Source\AdminTLE\Common\Common.Exceptions\obj\Debug\Common.Exceptions.pdb
+C:\Source\AdminTLE\Common\Common.Exceptions\obj\Debug\Common.Exceptions.csprojResolveAssemblyReference.cache
+C:\Source\WebAppDemo\Common\Common.Exceptions\bin\Debug\Common.Exceptions.dll
+C:\Source\WebAppDemo\Common\Common.Exceptions\bin\Debug\Common.Exceptions.pdb
+C:\Source\WebAppDemo\Common\Common.Exceptions\obj\Debug\Common.Exceptions.csprojResolveAssemblyReference.cache
+C:\Source\WebAppDemo\Common\Common.Exceptions\obj\Debug\Common.Exceptions.csproj.CoreCompileInputs.cache
+C:\Source\WebAppDemo\Common\Common.Exceptions\obj\Debug\Common.Exceptions.dll
+C:\Source\WebAppDemo\Common\Common.Exceptions\obj\Debug\Common.Exceptions.pdb
