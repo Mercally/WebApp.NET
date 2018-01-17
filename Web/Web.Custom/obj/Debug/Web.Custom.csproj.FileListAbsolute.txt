@@ -1,0 +1,6 @@
+C:\Source\WebAppDemo\Web\Web.Custom\bin\Debug\Web.Custom.dll
+C:\Source\WebAppDemo\Web\Web.Custom\bin\Debug\Web.Custom.pdb
+C:\Source\WebAppDemo\Web\Web.Custom\obj\Debug\Web.Custom.csprojResolveAssemblyReference.cache
+C:\Source\WebAppDemo\Web\Web.Custom\obj\Debug\Web.Custom.csproj.CoreCompileInputs.cache
+C:\Source\WebAppDemo\Web\Web.Custom\obj\Debug\Web.Custom.dll
+C:\Source\WebAppDemo\Web\Web.Custom\obj\Debug\Web.Custom.pdb

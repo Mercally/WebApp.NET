@@ -1,0 +1,12 @@
+C:\Source\AdminTLE\Web\Web.Security\bin\Debug\Web.Security.dll
+C:\Source\AdminTLE\Web\Web.Security\bin\Debug\Web.Security.pdb
+C:\Source\AdminTLE\Web\Web.Security\obj\Debug\Web.Security.csprojResolveAssemblyReference.cache
+C:\Source\AdminTLE\Web\Web.Security\obj\Debug\Web.Security.csproj.CoreCompileInputs.cache
+C:\Source\AdminTLE\Web\Web.Security\obj\Debug\Web.Security.dll
+C:\Source\AdminTLE\Web\Web.Security\obj\Debug\Web.Security.pdb
+C:\Source\WebAppDemo\Web\Web.Security\bin\Debug\Web.Security.dll
+C:\Source\WebAppDemo\Web\Web.Security\bin\Debug\Web.Security.pdb
+C:\Source\WebAppDemo\Web\Web.Security\obj\Debug\Web.Security.csprojResolveAssemblyReference.cache
+C:\Source\WebAppDemo\Web\Web.Security\obj\Debug\Web.Security.csproj.CoreCompileInputs.cache
+C:\Source\WebAppDemo\Web\Web.Security\obj\Debug\Web.Security.dll
+C:\Source\WebAppDemo\Web\Web.Security\obj\Debug\Web.Security.pdb
