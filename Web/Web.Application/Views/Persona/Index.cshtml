@@ -1,0 +1,117 @@
+﻿@using Common.Entities
+@model Common.Entities.Persona
+
+@{
+    ViewBag.Title = "Personas";
+    List<Persona> ListPersona = ViewBag.ListPersonas;
+}
+
+<h2>Personas</h2>
+<button type="button" onclick="PartialAction('@Url.Action("Add", "Persona")', 'DivForAdd', 'AddModal');" class="btn btn-primary">Create</button>
+<div id="DivForList">
+    @Html.Partial("List", ViewBag.List as List<Persona>)
+</div>
+
+<!-- Modal Edit -->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="DetailsModalLabel">Edit Person</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("Edit", "Persona", routeValues: new { }, ajaxOptions: new AjaxOptions() { AllowCache = false, Confirm = "Verifique sus datos antes de guardar\n¿Seguro que desea guardar?", HttpMethod = "Post" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div id="DivForEdit">
+                        @Html.Partial("Edit")
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <!--<button type="submit" class="btn btn-default">Save</button>-->
+                                <input type="hidden" name="btnSubmit" value="btnSubmitEdit" />
+                                <button type="submit" class="btn btn-primary btn-submit" id="btnSubmitEdit" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Procesando">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Add -->
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="AddModalLabel">New Person</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @Html.Partial("Add")
+        </div>
+    </div>
+</div>
+<!-- Modal Details -->
+<div class="modal fade" id="DetailsModal" tabindex="-1" role="dialog" aria-labelledby="DetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="DetailsModalLabel">Details</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="DivForDetails">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Delete -->
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="DetailsModalLabel">Delete</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="DivForDelete">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function PartialAction(Url, UpdateElementId, ModalIdOpen, ModalIdClose) {
+            $('#' + UpdateElementId).empty();
+            $.ajax({
+                method: 'GET',
+                url: Url,
+                dataType: 'html',
+                cache: false,
+                async: true,
+                success: function (response) {
+                    $('#' + UpdateElementId).html(response);
+                    $('#' + ModalIdOpen).modal('show');
+                }
+            });
+            if (ModalIdClose != null) {
+                $('#' + ModalIdClose).modal('hide');
+            }
+        }
+    </script>
+
+}
