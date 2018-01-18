@@ -65,7 +65,7 @@ namespace Data.DAL.Context
                 int Changes = cmd.ExecuteNonQuery();
                 Result = Changes > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Excepciones
             }

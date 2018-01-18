@@ -12,13 +12,16 @@ namespace Business.BL.Entities
 {
     public class PersonaBL
     {
-        public static List<Persona> GetData(List<Query> ListQuery, int IdQuery)
+        public static List<Persona> GetData(Query Query)
         {
             List<Persona> ListPersonas = new List<Persona>();
             try
             {
-                DataTable Table = ListQuery.Single(x => x.IdQuery == IdQuery).ResultQuery;
-
+                DataTable Table = new DataTable();
+                if (Query.IsResolve && Query.IsQuery)
+                {
+                    Table = Query.Result.ResultQuery;
+                }
                 foreach (DataRow Row in Table.Rows)
                 {
                     ListPersonas.Add(new Persona()
@@ -31,36 +34,79 @@ namespace Business.BL.Entities
                         Nombre = Row.IsNull("Nombre") ? "" : Row["Nombre"].ToString()
                     });
                 }
+
+                foreach (var item in Query.Includes)
+                {
+                    switch (item)
+                    {
+                        case "Persona.Propietario":
+                            var ListPropietarios = PropietarioBL.GetData(Query.FindFirst(Query.SubQuery, item));
+                            ListPersonas = ListPersonas.Select(x => new Persona()
+                            {
+                                Propietario = ListPropietarios.Where(p => p.PersonaId == x.Id),
+                                Apellido = x.Apellido,
+                                Correo = x.Correo,
+                                Edad = x.Edad,
+                                Estado = x.Estado,
+                                Id = x.Id,
+                                Nombre = x.Nombre
+                            }).ToList();
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Exceptios
             }
             return ListPersonas;
         }
 
-        public static Query GetAll()
+        public static Query GetAll(params string[] Includes)
         {
-            Query QueryCreate = new Query()
+            Query QuerySelect = new Query()
             {
                 RawQuery = "SELECT Id, Nombre, Apellido, Edad, Correo, Estado FROM rrhh.Persona;",
-                Parameters = new List<SqlParameter>(),
                 Type = TypeCrud.Query
             };
+            QuerySelect.Includes = Includes;
+            List<Query> ListSubQuey = new List<Query>();
+            foreach (var item in Includes)
+            {
+                Query SubQuery = null;
+                switch (item)
+                {
+                    case "Persona.Propietario":
+                        SubQuery = new Query()
+                        {
+                            RawQuery = "SELECT PR.Id, PR.PersonaId, PR.Estado FROM geo.Propietario AS PR " +
+                                       "INNER JOIN rrhh.Persona AS PE ON (PE.Id = PR.PersonaId);",
+                            Type = TypeCrud.Query
+                        };
+                        break;
+                    default:
+                        break;
+                }
+                SubQuery.NameInclude = item;
+                ListSubQuey.Add(SubQuery);
+            }
+            QuerySelect.SubQuery = ListSubQuey.ToArray();
 
-            return QueryCreate;
+            return QuerySelect;
         }
 
         public static Query GetById(long Id)
         {
-            Query QueryCreate = new Query()
+            Query QueryGetById = new Query()
             {
                 RawQuery = "SELECT Id, Nombre, Apellido, Edad, Correo, Estado FROM rrhh.Persona WHERE Id = @Id;",
                 Parameters = new List<SqlParameter>() { new SqlParameter("Id", Id) },
                 Type = TypeCrud.Query
             };
 
-            return QueryCreate;
+            return QueryGetById;
         }
 
         public static Query Create(Persona pPersona)
@@ -103,7 +149,7 @@ namespace Business.BL.Entities
 
         public static Query Delete(long Id)
         {
-            Query QueryUpdate = new Query()
+            Query QueryDelete = new Query()
             {
                 RawQuery = "DELETE rrhh.Persona WHERE Id = @Id;",
                 Parameters = new List<SqlParameter>() {
@@ -112,7 +158,20 @@ namespace Business.BL.Entities
                 Type = TypeCrud.Delete
             };
 
-            return QueryUpdate;
+            return QueryDelete;
+        }
+
+        public static Query Search(string Filtro)
+        {
+            Query QueryGetById = new Query()
+            {
+                RawQuery = "SELECT Id, Nombre, Apellido, Edad, Correo, Estado FROM rrhh.Persona " +
+                            "WHERE Nombre like '%'+@Filtro+'%' OR Apellido like '%'+@Filtro+'%' OR Correo like '%'+@Filtro+'%'",
+                Parameters = new List<SqlParameter>() { new SqlParameter("Filtro", Filtro) },
+                Type = TypeCrud.Query
+            };
+
+            return QueryGetById;
         }
     }
 }

@@ -17,10 +17,10 @@ namespace Business.BL.Test.Entities
         {
             string User = "Prueba";
 
-            Transaction Tran = new Transaction(new List<Query>() { PersonaBL.GetAll() }, User);
-
+            Transaction Tran = new Transaction(User, PersonaBL.GetAll());
             Tran.Execute();
-            List<Persona> ListPersonas = PersonaBL.GetData(Tran.ListQuery, 0);
+
+            List<Persona> ListPersonas = PersonaBL.GetData(Query.FindFirst(Tran.ListQuery, 0));
 
             Assert.IsNotNull(ListPersonas);
         }

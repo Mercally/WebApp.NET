@@ -3,7 +3,6 @@
 
 @{
     ViewBag.Title = "Personas";
-    List<Persona> ListPersona = ViewBag.ListPersonas;
 }
 
 <h2>Personas</h2>
@@ -92,26 +91,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts{
-    <script>
-        function PartialAction(Url, UpdateElementId, ModalIdOpen, ModalIdClose) {
-            $('#' + UpdateElementId).empty();
-            $.ajax({
-                method: 'GET',
-                url: Url,
-                dataType: 'html',
-                cache: false,
-                async: true,
-                success: function (response) {
-                    $('#' + UpdateElementId).html(response);
-                    $('#' + ModalIdOpen).modal('show');
-                }
-            });
-            if (ModalIdClose != null) {
-                $('#' + ModalIdClose).modal('hide');
-            }
-        }
-    </script>
-
-}

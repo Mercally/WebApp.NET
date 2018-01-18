@@ -16,3 +16,9 @@ C:\Source\WebAppDemo\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.csprojRe
 C:\Source\WebAppDemo\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.csproj.CoreCompileInputs.cache
 C:\Source\WebAppDemo\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.dll
 C:\Source\WebAppDemo\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.pdb
+C:\Source\GitHub\WebApp.NET\Web\Web.Security\bin\Debug\Web.Security.dll
+C:\Source\GitHub\WebApp.NET\Web\Web.Security\bin\Debug\Web.Security.pdb
+C:\Source\GitHub\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.csproj.CoreCompileInputs.cache
+C:\Source\GitHub\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.dll
+C:\Source\GitHub\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.pdb
+C:\Source\GitHub\WebApp.NET\Web\Web.Security\obj\Debug\Web.Security.csprojResolveAssemblyReference.cache

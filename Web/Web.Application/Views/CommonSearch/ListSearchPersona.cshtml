@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Common.Entities.Persona>
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre Completo
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Edad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Correo)
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)&nbsp;@Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Edad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Correo)
+        </td>
+        <td>
+            <button type="button" onclick="if (confirm('Desea seleccionar este elemento?')) { $('#PersonaId').val(@item.Id); $('#NombrePersona').val('@item.Nombre @item.Apellido'); $('#SearchModal').modal('hide'); alert('Ha seleccionado la persona'); }" class="btn btn-default"> Select</button>
+        </td>
+    </tr>
+}
+</table>

@@ -44,5 +44,7 @@ namespace Common.Entities
         [DisplayName("Estado")]
         [Required(ErrorMessage = "Este campo es requerido")]        
         public bool Estado { get; set; }
+
+        public IEnumerable<Propietario> Propietario { get; set; }
     }
 }

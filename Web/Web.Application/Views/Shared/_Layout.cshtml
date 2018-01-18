@@ -9,8 +9,6 @@
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <link href="~/Vendor/pace-master/themes/white/pace-theme-flash.css" rel="stylesheet" />
     <script src="~/Vendor/pace-master/js/pace.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -30,6 +28,9 @@
                 <ul class="nav navbar-nav">
                     @Html.ActionLink("Personas Temporal", "Index", "PersonaTemp", new { }, new { @class = "navbar-brand" })
                 </ul>
+                <ul class="nav navbar-nav">
+                    @Html.ActionLink("Propietarios Transaccional", "Index", "Propietario", new { }, new { @class = "navbar-brand" })
+                </ul>
             </div>
         </div>
     </div>
@@ -46,91 +47,8 @@
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $(window).ajaxError(function (event, xhr, settings) {
-                alert('¡Error! Ocurrió un error inesperado :(');
-            });
-
-            $(window).ajaxSuccess(function (event, xhr, settings) {
-                var Response = {};
-                try {
-                    Response = xhr.responseJSON;
-                } catch (e) {
-                    Response = null;
-                }
-                if (Response != null) {
-                    if (Response.ResponseId == 'Common') {
-                        //if (Response.BtnSubmitId != null) {
-                        //    $('#' + Response.BtnSubmitId).button('reset');
-                        //}
-                        if (Response.IsSuccess) {
-                            alert('¡Éxito! Datos guardados correctamente :)');
-                            if (Response.IsRedirected) {
-                                window.location = Response.RedirectTo;
-                            }
-                            if (Response.IsReloaded) {
-                                window.location = window.location.href;
-                            }
-                        } else {
-                            alert('¡Error! Ocurrió un error al guardar los datos :(');
-                        }
-                        if (Response.Modal != null) {
-                            if (Response.Modal.Ajax != null) {
-                                $.ajax({
-                                    method: Response.Modal.Ajax.Method,
-                                    url: Response.Modal.Ajax.Url,
-                                    data: Response.Modal.Ajax.Data,
-                                    dataType: Response.Modal.Ajax.DataType,
-                                    cache: Response.Modal.Ajax.Cache,
-                                    async: Response.Modal.Ajax.Async,
-                                    success: function (response) {
-                                        if (Response.Modal.Ajax.DataType == 'html') {
-                                            $('#' + Response.Modal.Ajax.UpdateElementId).html(response);
-                                        }
-                                    }
-                                });
-                            }
-                            if (Response.Modal.CloseModalId != null) {
-                                $('#' + Response.Modal.CloseModalId).modal('hide');
-                            }
-                            if (Response.Modal.OpenModalId != null) {
-                                $('#' + Response.Modal.OpenModalId).modal('show');
-                            }
-                        }
-                        if (Response.ListRenderPartialViews != null) {
-                            if (Response.ListRenderPartialViews.length > 0) {
-                                for (var i = 0; i < Response.ListRenderPartialViews.length; i++) {
-                                    var Ajax = Response.ListRenderPartialViews[i];
-                                    $.ajax({
-                                        method: Ajax.Method,
-                                        url: Ajax.Url,
-                                        data: Ajax.Data,
-                                        dataType: Ajax.DataType,
-                                        cache: Ajax.Cache,
-                                        async: Ajax.Async,
-                                        success: function (response) {
-                                            if (Ajax.DataType == 'html') {
-                                                $('#' + Ajax.UpdateElementId).html(response);
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            Pace.on('hide', function () {
-            });
-
-            //$('.btn-submit').on('click', function () {
-            //    var $this = $(this);
-            //    $this.button('loading');
-            //});
-        });
-    </script>
+    <!--Custom js-->
+    <script src="~/Scripts/Common/Site.js"></script>
     @RenderSection("Scripts", false)
 </body>
 </html>

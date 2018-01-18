@@ -13,7 +13,7 @@ namespace Business.BL.Common
         /// <summary>
         /// Lista de consultas a ejecutarse en la transacción
         /// </summary>
-        public List<Query> ListQuery { get; private set; }
+        public Query[] ListQuery { get; private set; }
         /// <summary>
         /// Determina si la transacción fue guardada
         /// </summary>
@@ -38,41 +38,42 @@ namespace Business.BL.Common
         /// Usuario del sistema
         /// </summary>
         public string User { get; private set; }
+
+        private Crud Crud { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="ListQuery">Lista de consultas a ejecutar</param>
         /// <param name="User">Nombr del usuario que hace la transacción</param>
-        public Transaction(List<Query> ListQuery, string User)
+        public Transaction(string User, params Query[] ListQuery)
         {
-            this.ListQuery = ListQuery ?? new List<Query>();
+            this.ListQuery = ListQuery ?? new Query[0];
             this.User = User;
         }
+
+        private int IdQuery = 0;
 
         /// <summary>
         /// Ejecuta la transacción actual
         /// </summary>
         public void Execute()
         {
-            int Index = 0; BrokenId = -1;
+            int BrokenId = -1;
             using (SqlConnection Con = new Connection().Connect())
             {
                 using (SqlTransaction Tran = Con.BeginTransaction())
                 {
                     try
                     {
-                        Crud Crud = new Crud(Con, Tran, User);
+                        Crud = new Crud(Con, Tran, this.User);
                         foreach (var Query in ListQuery)
                         {
-                            ExecuteQuery(Query, Crud);
-
-                            Query.IdQuery = Index;
+                            ExecuteQuery(Query);
                             if (IsBroken)
                             {
-                                BrokenId = Index;
+                                BrokenId = IdQuery;
                                 break;
                             }
-                            Index++;
                         }
 
                         if (IsBroken)
@@ -87,7 +88,7 @@ namespace Business.BL.Common
                             IsSuccess = IsCommited = true;
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         Tran.Rollback();
                         IsBroken = IsRollBacked = true;
@@ -98,44 +99,50 @@ namespace Business.BL.Common
             }
         }
 
-        private void ExecuteQuery(Query Query, Crud Crud)
+        private void ExecuteQuery(Query Query)
         {
-            switch (Query.Type)
+            if (Query != null)
             {
-                case TypeCrud.Create:
-                    Query.ResultScalar = Crud.Create(Query.RawQuery, Query.Parameters);
-                    Query.IsScalar = true;
-                    IsBroken = long.Parse(Query.ResultScalar.ToString()) < 1;
-                    break;
-                case TypeCrud.Delete:
-                    Query.ResultNoQuery = Crud.Delete(Query.RawQuery, Query.Parameters);
-                    Query.IsNonQuery = true;
-                    IsBroken = !Query.ResultNoQuery;
-                    break;
-                case TypeCrud.Update:
-                    Query.ResultNoQuery = Crud.Update(Query.RawQuery, Query.Parameters);
-                    Query.IsNonQuery = true;
-                    IsBroken = !Query.ResultNoQuery;
-                    break;
-                case TypeCrud.Query:
-                    Query.ResultQuery = Crud.Query(Query.RawQuery, Query.Parameters);
-                    Query.IsQuery = true;
-                    IsBroken = Query.ResultQuery is null;
-                    break;
-                default:
-                    break;
-            }
-            Query.IsResolve = true;
-        }
-
-        public void ExecuteQuery(Query Query)
-        {
-            using (SqlConnection Con = new Connection().Connect())
-            {
-                using (SqlTransaction Tran = Con.BeginTransaction())
+                Query.Result = new QueryResult();
+                switch (Query.Type)
                 {
-                    Crud Crud = new Crud(Con, Tran, User);
-                    ExecuteQuery(Query, Crud);
+                    case TypeCrud.Create:
+                        Query.Result.ResultScalar = Crud.Create(Query.RawQuery, Query.Parameters);
+                        Query.IsScalar = true;
+                        IsBroken = long.Parse(Query.Result.ResultScalar.ToString()) < 1;
+                        break;
+                    case TypeCrud.Delete:
+                        Query.Result.ResultNoQuery = Crud.Delete(Query.RawQuery, Query.Parameters);
+                        Query.IsNonQuery = true;
+                        IsBroken = !Query.Result.ResultNoQuery;
+                        break;
+                    case TypeCrud.Update:
+                        Query.Result.ResultNoQuery = Crud.Update(Query.RawQuery, Query.Parameters);
+                        Query.IsNonQuery = true;
+                        IsBroken = !Query.Result.ResultNoQuery;
+                        break;
+                    case TypeCrud.Query:
+                        Query.Result.ResultQuery = Crud.Query(Query.RawQuery, Query.Parameters);
+                        Query.IsQuery = true;
+                        IsBroken = Query.Result.ResultQuery is null;
+                        break;
+                    default:
+                        break;
+                }
+                Query.IsResolve = true;
+                Query.IdQuery = IdQuery;
+                if (IsBroken)
+                {
+                    Query.IsResolve = false;
+                    return;
+                }
+                IdQuery++;
+                if (Query.SubQuery != null)
+                {
+                    foreach (var SubQuery in Query.SubQuery)
+                    {
+                        ExecuteQuery(SubQuery);
+                    }
                 }
             }
         }

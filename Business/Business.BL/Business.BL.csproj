@@ -41,11 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\QueryResult.cs" />
     <Compile Include="Common\TransactionExtensions.cs" />
     <Compile Include="Common\Query.cs" />
     <Compile Include="Common\Transaction.cs" />
     <Compile Include="Common\TypeCrud.cs" />
     <Compile Include="Entities\PersonaBL.cs" />
+    <Compile Include="Entities\PropietarioBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

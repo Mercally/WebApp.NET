@@ -36,3 +36,17 @@ C:\Source\WebAppDemo\WebApp.NET\Business\Business.BL\obj\Debug\Business.BL.cspro
 C:\Source\WebAppDemo\WebApp.NET\Business\Business.BL\obj\Debug\Business.BL.csproj.CoreCompileInputs.cache
 C:\Source\WebAppDemo\WebApp.NET\Business\Business.BL\obj\Debug\Business.BL.dll
 C:\Source\WebAppDemo\WebApp.NET\Business\Business.BL\obj\Debug\Business.BL.pdb
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\obj\Debug\Business.BL.csprojResolveAssemblyReference.cache
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\obj\Debug\Business.BL.csproj.CoreCompileInputs.cache
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\obj\Debug\Business.BL.dll
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\obj\Debug\Business.BL.pdb
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\bin\Debug\Business.BL.dll
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\bin\Debug\Business.BL.pdb
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\bin\Debug\Common.Entities.dll
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\bin\Debug\Data.DAL.dll
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\bin\Debug\Web.Custom.dll
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\bin\Debug\System.Web.Mvc.dll
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\bin\Debug\Common.Entities.pdb
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\bin\Debug\Data.DAL.pdb
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\bin\Debug\Web.Custom.pdb
+C:\Source\GitHub\WebApp.NET\Business\Business.BL\bin\Debug\System.Web.Mvc.xml

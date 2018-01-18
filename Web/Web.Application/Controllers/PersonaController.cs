@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Business.BL.Common;
 using Business.BL.Entities;
 using Common.Entities;
-using Web.Application.ViewModels;
+using Web.Application.ViewModels.Common;
 
 namespace Web.Application.Controllers
 {
@@ -17,21 +17,35 @@ namespace Web.Application.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            Transaction Tran = new Transaction(new List<Query>() { PersonaBL.GetAll() }, "User");
+            Transaction Tran = new Transaction("User", PersonaBL.GetAll("Persona.Propietario"));
             Tran.Execute();
-            List<Persona> ListPersona = PersonaBL.GetData(Tran.ListQuery, 0);
-            ViewBag.List = ListPersona;
 
+            if (Tran.IsSuccess)
+            {
+                ViewBag.List = PersonaBL.GetData(Query.FindFirst(Tran.ListQuery, 0));
+            }
+            else
+            {
+                ViewBag.List = new List<Persona>();
+            }
             return View();
         }
 
         [HttpPost]
         public PartialViewResult List()
         {
-            Transaction Tran = new Transaction(new List<Query>() { PersonaBL.GetAll() }, "User");
+            Transaction Tran = new Transaction("User", PersonaBL.GetAll("Persona.Propietario"));
             Tran.Execute();
-            List<Persona> ListPersona = PersonaBL.GetData(Tran.ListQuery, 0);
 
+            List<Persona> ListPersona;
+            if (Tran.IsSuccess)
+            {
+                ListPersona = PersonaBL.GetData(Query.FindFirst(Tran.ListQuery, 0));
+            }
+            else
+            {
+                ListPersona = new List<Persona>();
+            }
             return PartialView(ListPersona);
         }
 
@@ -45,51 +59,69 @@ namespace Web.Application.Controllers
         public JsonResult Add(Persona Persona)
         {
             JSONResponse = new JsonResponse();
-            Transaction Tran = new Transaction(new List<Query> { PersonaBL.Create(Persona) }, "User");
-            Tran.Execute();
             if (ModelState.IsValid)
             {
-                Query Result = Tran.GetQuery(0);
-                JSONResponse.IsSuccess = true;
-                JSONResponse.Modal = new Modal()
+                Transaction Tran = new Transaction("User", PersonaBL.Create(Persona));
+                Tran.Execute();
+                if (Tran.IsSuccess)
                 {
-                    CloseModalId = "AddModal",
-                    OpenModalId = "DetailsModal",
-                    Ajax = new Ajax()
+                    var Result = Tran.GetQuery(0).Result;
+                    JSONResponse.IsSuccess = true;
+                    JSONResponse.Modal = new Modal()
                     {
-                        Url = Url.Action("Details", "Persona", new { id = Result.ResultScalar }),
-                        UpdateElementId = "DivForDetails"
-                    }
-                };
-                JSONResponse.ListRenderPartialViews.Add(new Ajax()
-                {
-                    UpdateElementId = "DivForList",
-                    Async = false,
-                    Method = "POST",
-                    Url = Url.Action("List", "Persona", null)
-                });
+                        CloseModalId = "AddModal",
+                        OpenModalId = "DetailsModal",
+                        Ajax = new Ajax()
+                        {
+                            Url = Url.Action("Details", "Persona", new { id = Result.ResultScalar }),
+                            UpdateElementId = "DivForDetails"
+                        }
+                    };
+                    JSONResponse.ListRenderPartialViews.Add(new Ajax()
+                    {
+                        UpdateElementId = "DivForList",
+                        Async = false,
+                        Method = "POST",
+                        Url = Url.Action("List", "Persona", null)
+                    });
+                }
             }
-
             return Json(JSONResponse);
         }
 
         [HttpGet]
         public PartialViewResult Details(long id)
         {
-            Transaction Tran = new Transaction(new List<Query>() { PersonaBL.GetById(id) }, "User");
+            Transaction Tran = new Transaction("User", PersonaBL.GetById(id));
             Tran.Execute();
-            Persona Persona = PersonaBL.GetData(Tran.ListQuery, 0).First();
 
+            Persona Persona;
+            if (Tran.IsSuccess)
+            {
+                Persona = PersonaBL.GetData(Query.FindFirst(Tran.ListQuery, 0)).FirstOrDefault();
+            }
+            else
+            {
+                Persona = null;
+            }
             return PartialView(Persona);
         }
 
         [HttpGet]
         public PartialViewResult Delete(long id)
         {
-            Transaction Tran = new Transaction(new List<Query>() { PersonaBL.GetById(id) }, "User");
+            Transaction Tran = new Transaction("User", PersonaBL.GetById(id));
             Tran.Execute();
-            Persona Persona = PersonaBL.GetData(Tran.ListQuery, 0).First();
 
+            Persona Persona;
+            if (Tran.IsSuccess)
+            {
+                Persona = PersonaBL.GetData(Query.FindFirst(Tran.ListQuery, 0)).FirstOrDefault();
+            }
+            else
+            {
+                Persona = null;
+            }
             return PartialView(Persona);
         }
 
@@ -97,7 +129,7 @@ namespace Web.Application.Controllers
         public JsonResult DeletePost(long id)
         {
             JSONResponse = new JsonResponse();
-            Transaction Tran = new Transaction(new List<Query>() { PersonaBL.Delete(id) }, "User");
+            Transaction Tran = new Transaction("User", PersonaBL.Delete(id));
             Tran.Execute();
 
             if (Tran.IsSuccess)
@@ -122,10 +154,18 @@ namespace Web.Application.Controllers
         [HttpGet]
         public PartialViewResult Edit(long id)
         {
-            Transaction Tran = new Transaction(new List<Query>() { PersonaBL.GetById(id) }, "User");
+            Transaction Tran = new Transaction("User", PersonaBL.GetById(id));
             Tran.Execute();
-            Persona Persona = PersonaBL.GetData(Tran.ListQuery, 0).FirstOrDefault();
 
+            Persona Persona;
+            if (Tran.IsSuccess)
+            {
+                Persona = PersonaBL.GetData(Query.FindFirst(Tran.ListQuery, 0)).FirstOrDefault();
+            }
+            else
+            {
+                Persona = null;
+            }
             return PartialView(Persona);
         }
 
@@ -135,7 +175,7 @@ namespace Web.Application.Controllers
             JSONResponse = new JsonResponse();
             if (ModelState.IsValid)
             {
-                Transaction Tran = new Transaction(new List<Query>() { PersonaBL.Update(Persona) }, "User");
+                Transaction Tran = new Transaction("User", PersonaBL.Update(Persona));
                 Tran.Execute();
                 if (Tran.IsSuccess)
                 {

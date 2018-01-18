@@ -17,7 +17,10 @@
         <th>
             @Html.DisplayNameFor(model => model.Estado)
         </th>
-        <th></th>
+        <th>
+            Propietarios
+        </th>
+        <th>Acciones</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -36,6 +39,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @item.Propietario.Count()
         </td>
         <td>
             <button type="button" onclick="PartialAction('@Url.Action("Edit", "Persona", new { id = item.Id })', 'DivForEdit', 'EditModal');" class="btn btn-primary">Edit</button>&nbsp;&nbsp;

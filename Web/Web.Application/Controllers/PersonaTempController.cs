@@ -7,7 +7,7 @@ using Business.BL.Common;
 using Business.BL.Entities;
 using Common.Entities;
 using Web.Application.Data;
-using Web.Application.ViewModels;
+using Web.Application.ViewModels.Common;
 
 namespace Web.Application.Controllers
 {

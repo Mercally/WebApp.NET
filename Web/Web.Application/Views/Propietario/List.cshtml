@@ -1,0 +1,42 @@
+﻿@using Common.Entities
+@using Web.Application.ViewModels
+@model IEnumerable<Propietario>
+
+@{
+    Layout = null;
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Persona.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Persona.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Persona.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Persona.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                <button type="button" onclick="PartialAction('@Url.Action("Edit", "Propietarios", new { id = item.Id })', 'DivForEdit', 'EditModal');" class="btn btn-primary">Edit</button>&nbsp;&nbsp;
+                <button type="button" onclick="PartialAction('@Url.Action("Details", "Propietarios", new { id = item.Id })', 'DivForDetails', 'DetailsModal');" class="btn btn-primary">Details</button>&nbsp;&nbsp;
+                <button type="button" onclick="PartialAction('@Url.Action("Delete", "Propietarios", new { id = item.Id })', 'DivForDelete', 'DeleteModal');" class="btn btn-primary">Delete</button>
+            </td>
+        </tr>
+    }
+</table>
