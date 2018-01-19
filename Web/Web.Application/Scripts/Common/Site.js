@@ -88,17 +88,22 @@ $(function () {
 // UpdateElementId : (string) Identificador del DOM donde se reemplazará el contenido de la solicitud
 // ModalIdOpen : (string) Identificador del modal a abrir después de completada la renderización de la resputa
 // ModalIdClose : (string) Identificador del modal a cerrar despúes de completada la renderización del nuevo modal
-function PartialAction(Url, UpdateElementId, ModalIdOpen, ModalIdClose){
+function PartialAction(Url, UpdateElementId, ModalIdOpen, ModalIdClose, Method = null){
     $('#' + UpdateElementId).empty();
+    if (Method == null) {
+        Method = 'GET';
+    }
     $.ajax({
-        method: 'GET',
+        method: Method,
         url: Url,
         dataType: 'html',
         cache: false,
         async: true,
         success: function (response) {
             $('#' + UpdateElementId).html(response);
-            $('#' + ModalIdOpen).modal('show');
+            if (ModalIdOpen != null) {
+                $('#' + ModalIdOpen).modal('show');
+            }
         }
     });
     if (ModalIdClose != null) {

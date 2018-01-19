@@ -47,7 +47,7 @@
 </div>
 <!-- Modal Add -->
 <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="AddModalLabel">New</h3>
@@ -104,10 +104,28 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div id="DivForSearch">
-                    @Html.Partial(Url.View("SearchPersona", "CommonSearch"), new SearchPersona())
-                </div>
+                @using (Ajax.BeginForm("ListSearchPersona", new { controller = "CommonSearch" }, ajaxOptions: new AjaxOptions() { AllowCache = false, HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "DivForListSearchPersona" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div id="DivForSearch">
+                        @Html.Partial(Url.View("SearchPersona", "CommonSearch"), new SearchPersona())
+                    </div>
+                    <br />
+                }
+            </div>
+            <div id="DivForListSearchPersona" style="width:100%; overflow-y:auto; max-height: 250px;">
+                @Html.Partial(Url.View("ListSearchPersona", "CommonSearch"), new List<Common.Entities.Persona>())
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+@section Scripts{
+<script>
+    $('#SearchModal').on('show.bs.modal', function () {
+        PartialAction('@Url.Action("ListSearchPersona", "CommonSearch", new { Filtro = "" })', 'DivForListSearchPersona', null, null, 'POST');
+    });
+</script>
+    }

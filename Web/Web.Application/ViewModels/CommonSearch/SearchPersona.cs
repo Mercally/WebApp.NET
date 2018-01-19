@@ -8,6 +8,7 @@ namespace Web.Application.ViewModels.CommonSearch
 {
     public class SearchPersona
     {
+        [Required]
         [MinLength(5, ErrorMessage = "Ingrese un filtro con más de 5 caracteres")]
         [MaxLength(100)]
         public string Filtro { get; set; }
