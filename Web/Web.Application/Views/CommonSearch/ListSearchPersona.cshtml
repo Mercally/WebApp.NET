@@ -13,20 +13,33 @@
         </th>
         <th></th>
     </tr>
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)&nbsp;@Html.DisplayFor(modelItem => item.Apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Edad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Correo)
-        </td>
-        <td>
-            <button type="button" onclick="if (confirm('Desea seleccionar este elemento?')) { $('#PersonaId').val(@item.Id); $('#NombrePersona').val('@item.Nombre @item.Apellido'); $('#SearchModal').modal('hide'); alert('Ha seleccionado la persona'); }" class="btn btn-default"> Select</button>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)&nbsp;@Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Edad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Correo)
+            </td>
+            <td>
+                <button type="button" onclick="SelectPerson(@item.Id, '@item.Nombre @item.Apellido');" class="btn btn-default"> Select</button>
+            </td>
+        </tr>
+    }
 </table>
+<script type="text/javascript">
+    function SelectPerson(id, nombre) {
+        alertify.confirm('Seleccionar', '<h2>¿Desea seleccionar a la persona?</h2> Ha seleccionado a: ' + nombre,
+            function () {
+                $('#PersonaId').val(id);
+                $('#NombrePersona').val(nombre);
+                $('#SearchModal').modal('hide');
+            },
+            function () {
+            });
+    }
+</script>

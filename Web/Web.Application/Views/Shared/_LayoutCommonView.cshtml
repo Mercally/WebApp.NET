@@ -1,0 +1,15 @@
+﻿<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1 id="header-title"></h1>
+    <ol class="breadcrumb" id="header-location"></ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div id="Body">
+        @RenderBody()
+    </div>
+</section>
+<!--Actualiza el archivo para las nuevas validaciones de los formulacios-->
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@RenderSection("Scripts", false)

@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Application.ViewModels;
 
 namespace Web.Application.Controllers
 {
+    [OutputCache(Duration = 0, Location = System.Web.UI.OutputCacheLocation.Client, NoStore = true)]
     public class CommonSearchController : Controller
     {
         [HttpGet]

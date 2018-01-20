@@ -1,16 +1,17 @@
 ﻿@using Common.Entities
-@using Web.Application.ViewModels.CommonSearch
+@using Web.Application.ViewModels
 @using Web.Custom.HtmlHelper
 @model Propietario
 
 @{
     ViewBag.Title = "Propietarios";
+    Layout = "~/Views/Shared/_LayoutCommonView.cshtml";
+    ViewBag.List = ViewBag.List ?? new List<Propietario>();
 }
 
-<h2>Propietarios</h2>
 <button type="button" onclick="PartialAction('@Url.Action("Add", "Propietario")', 'DivForAdd', 'AddModal');" class="btn btn-primary">Create</button>
 <div id="DivForList">
-    @Html.Partial("List", ViewBag.List as List<Propietario>)
+    @Html.Partial(Url.View("List", "Propietario"), ViewBag.List as List<Propietario>)
 </div>
 
 <!-- Modal Edit -->
@@ -24,7 +25,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using (Ajax.BeginForm("Edit", "Propietario", routeValues: new { }, ajaxOptions: new AjaxOptions() { AllowCache = false, Confirm = "Verifique sus datos antes de guardar\n¿Seguro que desea guardar?", HttpMethod = "Post" }))
+                @using (Ajax.BeginForm("Edit", "Propietario", new AjaxOptions() { AllowCache = false, HttpMethod = "Post" }))
                 {
                     @Html.AntiForgeryToken()
                     <div id="DivForEdit">
@@ -55,7 +56,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @Html.Partial("Add")
+            @Html.Partial(Url.View("Add", "Propietario"), new PropietarioViewModel())
         </div>
     </div>
 </div>
@@ -104,7 +105,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using (Ajax.BeginForm("ListSearchPersona", new { controller = "CommonSearch" }, ajaxOptions: new AjaxOptions() { AllowCache = false, HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "DivForListSearchPersona" }))
+                @using (Ajax.BeginForm("ListSearchPersona", "CommonSearch", ajaxOptions: new AjaxOptions() { AllowCache = false, HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "DivForListSearchPersona" }))
                 {
                     @Html.AntiForgeryToken()
                     <div id="DivForSearch">
@@ -123,9 +124,9 @@
     </div>
 </div>
 @section Scripts{
-<script>
+    <script>
     $('#SearchModal').on('show.bs.modal', function () {
         PartialAction('@Url.Action("ListSearchPersona", "CommonSearch", new { Filtro = "" })', 'DivForListSearchPersona', null, null, 'POST');
     });
-</script>
-    }
+    </script>
+}

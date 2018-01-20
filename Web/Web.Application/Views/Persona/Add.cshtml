@@ -4,12 +4,12 @@
     Layout = null;
 }
 
-@using (Ajax.BeginForm("Add", new { controller = "Persona" }, ajaxOptions: new AjaxOptions() { AllowCache = false, Confirm = "Verifique sus datos antes de guardar\n¿Seguro que desea guardar?", HttpMethod = "Post" }))
+@using (Ajax.BeginForm("Add", "Persona", new AjaxOptions() { AllowCache = false, HttpMethod = "Post" }, new { @data_confirm = "true" }))
 {
     @Html.AntiForgeryToken()
     <div id="DivForAdd">
         <div class="modal-body">
-            <div class="form-horizontal">
+            <div class="form-horizontal center-block">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })

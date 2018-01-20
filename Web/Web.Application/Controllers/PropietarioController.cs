@@ -6,12 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Web.Application.ViewModels.Common;
+using System.Web.Script.Serialization;
+using Web.Application.ViewModels;
 
 namespace Web.Application.Controllers
 {
+    [OutputCache(Duration = 0, Location = System.Web.UI.OutputCacheLocation.Client, NoStore = true)]
     public class PropietarioController : Controller
     {
+        JavaScriptSerializer jss = new JavaScriptSerializer();
         public JsonResponse JSONResponse { get; set; }
 
         [HttpGet]
@@ -27,6 +30,20 @@ namespace Web.Application.Controllers
             {
                 ViewBag.List = new List<Propietario>();
             }
+            JSONResponse = new JsonResponse()
+            {
+                Header = new Header()
+                {
+                    Title = "Propietario Transaccional",
+                    ListLocation = new List<Location>() {
+                     new Location() { IsActive = false, Name = "Dashboard", Url = Url.Action("Index", "App") },
+                     new Location() { IsActive = true, Name = "Propietario Transaccional", Url = Url.Action("Index", "Propietario") }
+                    }
+                }
+            };
+
+            string json = jss.Serialize(JSONResponse);
+            HttpContext.Response.AddHeader("customresponse", json);
             return View();
         }
 

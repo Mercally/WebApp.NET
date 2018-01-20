@@ -1,14 +1,17 @@
 ﻿@using Common.Entities
+@using Web.Custom.HtmlHelper
 @model Common.Entities.Persona
 
 @{
     ViewBag.Title = "Personas Temporal";
+    Layout = "~/Views/Shared/_LayoutCommonView.cshtml";
+
+    ViewBag.List = ViewBag.List ?? new List<Persona>();
 }
 
-<h2>Personas</h2>
 <button type="button" onclick="PartialAction('@Url.Action("Add", "PersonaTemp")', 'DivForAdd', 'AddModal');" class="btn btn-primary">Create</button>
 <div id="DivForList">
-    @Html.Partial("List", ViewBag.List as List<Persona>)
+    @Html.Partial(Url.View("List", "PersonaTemp"), ViewBag.List as List<Persona>)
 </div>
 
 <!-- Modal Edit -->
@@ -22,11 +25,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using (Ajax.BeginForm("Edit", "PersonaTemp", routeValues: new { }, ajaxOptions: new AjaxOptions() { AllowCache = false, Confirm = "Verifique sus datos antes de guardar\n¿Seguro que desea guardar?", HttpMethod = "Post" }))
+                @using (Ajax.BeginForm("Edit", "PersonaTemp", ajaxOptions: new AjaxOptions() { AllowCache = false, HttpMethod = "Post" }, htmlAttributes: new { @data_confirm = "true", @data_title = "Edit Person" }))
                 {
                     @Html.AntiForgeryToken()
                     <div id="DivForEdit">
-                        @Html.Partial("Edit")
+                        @Html.Partial(Url.View("Edit", "PersonaTemp"))
                     </div>
                     <div class="modal-footer">
                         <div class="form-group">
@@ -53,7 +56,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @Html.Partial("Add")
+            @Html.Partial(Url.View("Add", "PersonaTemp"))
         </div>
     </div>
 </div>

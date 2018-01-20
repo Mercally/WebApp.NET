@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-@using (Ajax.BeginForm("Add", new { controller = "PersonaTemp" }, ajaxOptions: new AjaxOptions() { AllowCache = false, Confirm = "Verifique sus datos antes de guardar\n¿Seguro que desea guardar?", HttpMethod = "Post" }))
+@using (Ajax.BeginForm("Add", "PersonaTemp", new AjaxOptions() { AllowCache = false, HttpMethod = "Post" }))
 {
     @Html.AntiForgeryToken()
     <div id="DivForAdd">

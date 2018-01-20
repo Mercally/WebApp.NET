@@ -1,7 +1,7 @@
-﻿@using Web.Application.ViewModels.Propietario
+﻿@using Web.Application.ViewModels
 @model PropietarioViewModel
 
-@using (Ajax.BeginForm("Add", new { controller = "Propietario" }, ajaxOptions: new AjaxOptions() { AllowCache = false, Confirm = "Verifique sus datos antes de guardar\n¿Seguro que desea guardar?", HttpMethod = "Post" }))
+@using (Ajax.BeginForm("Add", "Propietario", new AjaxOptions() { AllowCache = false, HttpMethod = "Post" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.PersonaId, new { htmlAttributes = new { @class = "form-control", @id = "PersonaId" } })

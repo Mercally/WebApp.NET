@@ -1,0 +1,26 @@
+﻿@using Web.Custom.HtmlHelper
+@using Common.Entities
+@{
+    Layout = "~/Views/Shared/_DashBoard1.cshtml";
+}
+
+<h2>
+    Cargando...
+</h2>
+
+@section Scripts{
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            method: 'GET',
+            url: '@Url.Action("Dashboard", "App")',
+            dataType: 'html',
+            cache: false,
+            async: true,
+            success: function (response) {
+                $('#Body').replaceWith(response);
+            }
+        });
+    });
+</script>
+}
