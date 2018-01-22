@@ -15,7 +15,6 @@ namespace Web.Application.Controllers
     [OutputCache(Duration = 0, Location = System.Web.UI.OutputCacheLocation.Client, NoStore = true)]
     public class PersonaTempController : Controller
     {
-        JavaScriptSerializer jss = new JavaScriptSerializer();
         public JsonResponse JSONResponse { get; set; }
         public static List<Persona> ListPersona { get; set; }
 
@@ -26,21 +25,6 @@ namespace Web.Application.Controllers
 
             ListPersona = ListPersona ?? Personas.ListPersonas;
             ViewBag.List = ListPersona;
-
-            JSONResponse = new JsonResponse()
-            {
-                Header = new Header()
-                {
-                    Title = "Persona Temporal",
-                    ListLocation = new List<Location>() {
-                     new Location() { IsActive = false, Name = "Dashboard", Url = Url.Action("Index", "App") },
-                     new Location() { IsActive = true, Name = "Persona Temporal", Url = Url.Action("Index", "PersonaTemp") }
-                    }
-                }
-            };
-
-            string json = jss.Serialize(JSONResponse);
-            HttpContext.Response.AddHeader("customresponse", json);
             return View();
         }
 

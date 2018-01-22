@@ -1,4 +1,6 @@
-﻿
+﻿// Variable para detener submit de forms
+var submitForm = false;
+
 // Ejecuta la llamada de las vistas parciales y reemplazar en Body.
 $('body').on('click', 'a.a-ajax', function (evt) {
     evt.preventDefault();
@@ -10,6 +12,16 @@ $('body').on('click', 'a.a-ajax', function (evt) {
 $('body').on('click', 'a.a-redirect', function () {
     window.location = $(this).attr('href');
 });
+
+//$('#div_carga').hide();
+//$(window).ajaxStart(function () {
+//    var $this = $('div#div_carga');
+//    $this.show();
+//});
+//$(window).ajaxStop(function () {
+//    var $this = $('div#div_carga');
+//    $this.hide();
+//});
 
 //Maneja los errores de las solicitudes
 $(window).ajaxError(function (event, xhr, settings) {
@@ -39,33 +51,33 @@ $(window).ajaxSuccess(function (event, xhr, settings) {
     var customResponse = {}; // Header
     try {
         response = xhr.responseJSON;
-        HandlerResponse(response);
     } catch (e) {
-        
     }
 
-    try {
-        var headers = xhr.getAllResponseHeaders().split("\n");
-        for (var i = 0; i < headers.length; i++) {
-            if (headers[i].includes("customresponse")) {//
-                var stringobj = headers[i].substring(16, headers[i].length);
-                customResponse = JSON.parse(stringobj);
-            }
-        }
-        if (customResponse != null) {
-            HandlerHeaderResponse(customResponse);
-        }
-    } catch (e) {
-    
+    //try {
+    //    var headers = xhr.getAllResponseHeaders().split("\n");
+    //    for (var i = 0; i < headers.length; i++) {
+    //        if (headers[i].includes("customresponse")) {//
+    //            var stringobj = headers[i].substring(16, headers[i].length);
+    //            customResponse = JSON.parse(stringobj);
+    //        }
+    //    }
+    //} catch (e) {
+    //}
+
+    if (response != undefined) {
+        HandlerResponse(response);
     }
+    //if (customResponse != undefined) {
+    //    HandlerHeaderResponse(customResponse);
+    //}
+
 });
+
 
 //Pace.on('hide', function () {
 // fin de carga ajax
 //});
-
-// Variable para detener submit de forms
-var submitForm = false;
 
 //$('.btn-submit').on('click', function () {
 //    var $this = $(this);
@@ -79,7 +91,6 @@ var submitForm = false;
 function HandlerError() {
 
 }
-
 
 // Manejador de las respuestas
 function HandlerResponse(response){
@@ -151,30 +162,30 @@ function HandlerResponseCommon(response){
     }
 }
 
-function HandlerHeaderResponse(response) {
-    if (response.Header != undefined) {
-        var Header = response.Header;
-        Header.Title = Header.Title || '';
-        $('#header-title').html(Header.Title);
-        Header.ListLocation = Header.ListLocation || [];
-        var lis = [];
-        for (var i = 0; i < Header.ListLocation.length; i++) {
-            var item = Header.ListLocation[i];
-            let active = ''; let aclass = '';
-            if (item.IsActive) {
-                active = ' class="active"';
-            }
-            if(item.Name == "Dashboard"){
-                aclass = 'class="a-redirect"';
-            }else{
-                aclass = 'class="a-ajax"';
-            }
-            item.Url = item.Url || "#";
-            lis.push('<li' + active + '><a href="' + item.Url + '"' + aclass + '>' + item.Name + '</a></li>');
-        }
-        $('#header-location').html(lis);
-    }
-}
+//function HandlerHeaderResponse(response) {
+//    if (response.Header != undefined) {
+//        var Header = response.Header;
+//        Header.Title = Header.Title || '';
+//        $('#header-title').html(Header.Title);
+//        Header.ListLocation = Header.ListLocation || [];
+//        var lis = [];
+//        for (var i = 0; i < Header.ListLocation.length; i++) {
+//            var item = Header.ListLocation[i];
+//            let active = ''; let aclass = '';
+//            if (item.IsActive) {
+//                active = ' class="active"';
+//            }
+//            if(item.Name == "Dashboard"){
+//                aclass = 'class="a-redirect"';
+//            }else{
+//                aclass = 'class="a-ajax"';
+//            }
+//            item.Url = item.Url || "#";
+//            lis.push('<li' + active + '><a href="' + item.Url + '"' + aclass + '>' + item.Name + '</a></li>');
+//        }
+//        $('#header-location').html(lis);
+//    }
+//}
 
 // Ejecuta la apertura o cierre de modales de forma dinámica
 // url : (string) url donde se cuentra la vista parcial a cargar

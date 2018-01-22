@@ -123,6 +123,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\alert.js.map" />
+    <Content Include="Scripts\Common\Site.css" />
     <Content Include="Scripts\dist\css\adminlte.css.map" />
     <Content Include="Scripts\dist\css\adminlte.min.css.map" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />

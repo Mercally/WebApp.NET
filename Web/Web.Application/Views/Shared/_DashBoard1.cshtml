@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="expires" content="0">
-    <title>App | @ViewBag.Title</title>
+    <title id="tite-page">App | @ViewBag.Title</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 
     <link href="~/Vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -24,34 +24,23 @@
     <link href="~/Vendor/alertify/css/alertify.min.css" rel="stylesheet" />
     <link href="~/Vendor/pace-master/themes/white/pace-theme-flash.css" rel="stylesheet" />
     <script src="~/Vendor/pace-master/js/pace.js"></script>
+    <link href="~/Scripts/Common/Site.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+    @*<div class="spinner overlay" id="div_carga">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+        <div class="spinner-text">
+            <center>Cargando...</center>
+        </div>
+    </div>*@
     <div class="wrapper" style="margin-top: -50px;">
         @Html.Partial(Url.View("_Header", "Shared"))
         @Html.Partial(Url.View("_Navigator", "Shared"))
-        <div class="content-wrapper">
-            <div id="Body">
-                @RenderBody()
-            </div>
-            @*
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Dashboard
-                <small>Control panel</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
+        <div class="content-wrapper" id="Body">
             @RenderBody()
-        </section>*@
         </div>
         @Html.Partial(Url.View("_Footer", "Shared"))
     </div>

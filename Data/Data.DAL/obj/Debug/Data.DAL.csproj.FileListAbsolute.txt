@@ -21,3 +21,4 @@ C:\Source\GitHub\WebApp.NET\Data\Data.DAL\bin\Debug\Data.DAL.pdb
 C:\Source\GitHub\WebApp.NET\Data\Data.DAL\obj\Debug\Data.DAL.csproj.CoreCompileInputs.cache
 C:\Source\GitHub\WebApp.NET\Data\Data.DAL\obj\Debug\Data.DAL.dll
 C:\Source\GitHub\WebApp.NET\Data\Data.DAL\obj\Debug\Data.DAL.pdb
+C:\Source\GitHub\WebApp.NET\Data\Data.DAL\obj\Debug\Data.DAL.csprojResolveAssemblyReference.cache

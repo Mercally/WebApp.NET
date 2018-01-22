@@ -9,6 +9,14 @@
     ViewBag.List = ViewBag.List ?? new List<Propietario>();
 }
 
+@section header{
+    <h1>Propietarios Transaccional</h1>
+    <ol class="breadcrumb">
+        <li><a href="/" class="a-redirect">Dashboard</a></li>
+        <li class="active">Propietarios Transaccional</li>
+    </ol>
+}
+
 <button type="button" onclick="PartialAction('@Url.Action("Add", "Propietario")', 'DivForAdd', 'AddModal');" class="btn btn-primary">Create</button>
 <div id="DivForList">
     @Html.Partial(Url.View("List", "Propietario"), ViewBag.List as List<Propietario>)

@@ -9,6 +9,14 @@
     ViewBag.List = ViewBag.List ?? new List<Persona>();
 }
 
+@section header{
+    <h1>Persona Temporal</h1>
+    <ol class="breadcrumb">
+        <li><a href="/" class="a-redirect">Dashboard</a></li>
+        <li class="active">Persona Temporal</li>
+    </ol>
+}
+
 <button type="button" onclick="PartialAction('@Url.Action("Add", "PersonaTemp")', 'DivForAdd', 'AddModal');" class="btn btn-primary">Create</button>
 <div id="DivForList">
     @Html.Partial(Url.View("List", "PersonaTemp"), ViewBag.List as List<Persona>)

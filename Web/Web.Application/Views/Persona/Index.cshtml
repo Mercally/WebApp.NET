@@ -5,17 +5,25 @@
 @{
     ViewBag.Title = "Personas";
     Layout = "~/Views/Shared/_LayoutCommonView.cshtml";
-    
+
     if (ViewBag.List == null)
     {
         ViewBag.List = new List<Persona>();
     }
 }
 
+@section header{
+    <h1>Persona Transaccional</h1>
+    <ol class="breadcrumb">
+        <li><a href="/" class="a-redirect">Dashboard</a></li>
+        <li class="active">Persona Transaccional</li>
+    </ol>
+}
+
 <button type="button" onclick="PartialAction('@Url.Action("Add", "Persona")', 'DivForAdd', 'AddModal');" class="btn btn-primary">Create</button>
 <div id="DivForList">
 
-    @Html.Partial(Url.View("List","Persona"), ViewBag.List as List<Persona>)
+    @Html.Partial(Url.View("List", "Persona"), ViewBag.List as List<Persona>)
 </div>
 
 <!-- Modal Edit -->
