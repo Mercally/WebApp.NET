@@ -51,6 +51,20 @@ namespace Web.Application.Controllers
         }
 
         [HttpGet]
+        public PartialViewResult Details(long id)
+        {
+            Transaction Tran = new Transaction("User", PropietarioBL.GetById(id));
+            Tran.Execute();
+
+            Propietario Propietario = null;
+            if (Tran.IsSuccess)
+            {
+                Propietario = PropietarioBL.GetData(Query.FindFirst(Tran.ListQuery, 0)).FirstOrDefault();
+            }
+            return PartialView(Propietario);
+        }
+
+        [HttpGet]
         public PartialViewResult Add()
         {
             return PartialView();
@@ -72,12 +86,12 @@ namespace Web.Application.Controllers
                     JSONResponse.Modal = new Modal()
                     {
                         CloseModalId = "AddModal",
-                        //OpenModalId = "DetailsModal",
-                        //Ajax = new Ajax()
-                        //{
-                        //    Url = Url.Action("Details", "Persona", new { id = Result.ResultScalar }),
-                        //    UpdateElementId = "DivForDetails"
-                        //}
+                        OpenModalId = "DetailsModal",
+                        Ajax = new Ajax()
+                        {
+                            Url = Url.Action("Details", "Propietario", new { id = Result.ResultScalar }),
+                            UpdateElementId = "DivForDetails"
+                        }
                     };
                     JSONResponse.ListRenderPartialViews.Add(new Ajax()
                     {
@@ -86,7 +100,53 @@ namespace Web.Application.Controllers
                         Method = "POST",
                         Url = Url.Action("List", "Propietario", null)
                     });
-                }   
+                }
+            }
+            return Json(JSONResponse);
+        }
+
+        [HttpGet]
+        public PartialViewResult Edit(long id)
+        {
+            Transaction Tran = new Transaction("User", PropietarioBL.GetById(id, "Propietario.Persona"));
+            Tran.Execute();
+
+            Propietario Propietario = new Propietario();
+            if (Tran.IsSuccess)
+            {
+                Propietario = PropietarioBL.GetData(Tran.GetQuery(0)).FirstOrDefault();
+            }
+
+            PropietarioViewModel PVM = new PropietarioViewModel()
+            {
+                Estado = Propietario.Estado,
+                Id = Propietario.Id,
+                Nombre = Propietario.Persona.Nombre + " " + Propietario.Persona.Apellido,
+                PersonaId = Propietario.PersonaId
+            };
+
+            return PartialView(PVM);
+        }
+
+        [HttpPost]
+        public JsonResult Edit(Propietario Propietario)
+        {
+            JSONResponse = new JsonResponse();
+            Transaction Tran = new Transaction("User", PropietarioBL.Update(Propietario));
+
+            if (Tran.IsSuccess)
+            {
+                JSONResponse.IsSuccess = true;
+                JSONResponse.Modal = new Modal()
+                {
+                    CloseModalId = "EditModal",
+                    OpenModalId = "DetailsModal",
+                    Ajax = new Ajax()
+                    {
+                        Url = Url.Action("Details", "Propietario", new { id = Propietario.Id }),
+                        UpdateElementId = "DivForDetails"
+                    }
+                };
             }
             return Json(JSONResponse);
         }

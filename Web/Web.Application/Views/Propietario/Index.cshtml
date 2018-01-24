@@ -24,7 +24,7 @@
 
 <!-- Modal Edit -->
 <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="DetailsModalLabel">Edit Person</h3>
@@ -37,15 +37,13 @@
                 {
                     @Html.AntiForgeryToken()
                     <div id="DivForEdit">
-                        @*@Html.Partial("Edit")*@
+                        @Html.Partial(Url.View("Edit", "Propietario"), new Web.Application.ViewModels.PropietarioViewModel())
                     </div>
                     <div class="modal-footer">
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <!--<button type="submit" class="btn btn-default">Save</button>-->
-                                <input type="hidden" name="btnSubmit" value="btnSubmitEdit" />
-                                <button type="submit" class="btn btn-primary btn-submit" id="btnSubmitEdit" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Procesando">Save</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </div>
                     </div>

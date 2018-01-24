@@ -30,15 +30,16 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     @*<div class="spinner overlay" id="div_carga">
-        <div class="double-bounce1"></div>
-        <div class="double-bounce2"></div>
-        <div class="spinner-text">
-            <center>Cargando...</center>
-        </div>
-    </div>*@
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+            <div class="spinner-text">
+                <center>Cargando...</center>
+            </div>
+        </div>*@
     <div class="wrapper" style="margin-top: -50px;">
         @Html.Partial(Url.View("_Header", "Shared"))
         @Html.Partial(Url.View("_Navigator", "Shared"))
+        <div class="loading" id="loading">Loading&#8230;</div>
         <div class="content-wrapper" id="Body">
             @RenderBody()
         </div>

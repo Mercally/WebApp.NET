@@ -1,0 +1,28 @@
+﻿@using Web.Application.ViewModels
+@model PropietarioViewModel
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.Label("Nombre")
+    <div class="input-group">
+        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @id = "NombrePersona", @readonly = "readonly" } })
+        <span class="input-group-btn">
+            <button type="button" onclick="PartialAction('@Url.Action("SearchPersona", "CommonSearch")', 'DivForSearch', 'SearchModal', null);" class="btn btn-secondary glyphicon glyphicon-search"></button>
+        </span>
+    </div>
+    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Estado, htmlAttributes: new { })
+        <div class="form-check">
+            @Html.EditorFor(model => model.Estado)
+        </div>
+        @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>

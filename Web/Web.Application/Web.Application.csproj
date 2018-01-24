@@ -7442,6 +7442,8 @@
     <Content Include="tsconfug.json" />
     <Content Include="Views\Common\NotFound.cshtml" />
     <Content Include="Views\Common\InternalError.cshtml" />
+    <Content Include="Views\Propietario\Details.cshtml" />
+    <Content Include="Views\Propietario\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

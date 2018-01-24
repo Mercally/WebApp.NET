@@ -33,9 +33,9 @@
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                <button type="button" onclick="PartialAction('@Url.Action("Edit", "Propietarios", new { id = item.Id })', 'DivForEdit', 'EditModal');" class="btn btn-primary">Edit</button>&nbsp;&nbsp;
-                <button type="button" onclick="PartialAction('@Url.Action("Details", "Propietarios", new { id = item.Id })', 'DivForDetails', 'DetailsModal');" class="btn btn-primary">Details</button>&nbsp;&nbsp;
-                <button type="button" onclick="PartialAction('@Url.Action("Delete", "Propietarios", new { id = item.Id })', 'DivForDelete', 'DeleteModal');" class="btn btn-primary">Delete</button>
+                <button type="button" onclick="PartialAction('@Url.Action("Edit", "Propietario", new { id = item.Id })', 'DivForEdit', 'EditModal');" class="btn btn-primary">Edit</button>&nbsp;&nbsp;
+                <button type="button" onclick="PartialAction('@Url.Action("Details", "Propietario", new { id = item.Id })', 'DivForDetails', 'DetailsModal');" class="btn btn-primary">Details</button>&nbsp;&nbsp;
+                <button type="button" onclick="PartialAction('@Url.Action("Delete", "Propietario", new { id = item.Id })', 'DivForDelete', 'DeleteModal');" class="btn btn-primary">Delete</button>
             </td>
         </tr>
     }

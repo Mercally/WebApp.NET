@@ -8,6 +8,7 @@ namespace Web.Application.ViewModels
 {
     public class PropietarioViewModel
     {
+        public long Id { get; set; }
         [Required(ErrorMessage ="Debe seleccionar una persona")]
         public string Nombre { get; set; }
         [Required(ErrorMessage = "Debe seleccionar una persona")]

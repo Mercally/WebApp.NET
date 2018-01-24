@@ -61,16 +61,16 @@ namespace Business.BL.Entities
             return ListPropietario;
         }
 
-        public static Query GetAll(params string[] Includes)
+        public static Query GetAll(params string[] Include)
         {
             Query QuerySelect = new Query()
             {
                 RawQuery = "SELECT Id, PersonaId, Estado FROM geo.Propietario;",
                 Type = TypeCrud.Query
             };
-            QuerySelect.Includes = Includes;
+            QuerySelect.Includes = Include;
             List<Query> ListSubQuey = new List<Query>();
-            foreach (var item in Includes)
+            foreach (var item in Include)
             {
                 Query SubQuery = null;
                 switch (item)
@@ -91,11 +91,10 @@ namespace Business.BL.Entities
             }
             QuerySelect.SubQuery = ListSubQuey.ToArray();
 
-
             return QuerySelect;
         }
 
-        public static Query GetById(long Id)
+        public static Query GetById(long Id, params string[] Include)
         {
             Query QueryGetById = new Query()
             {
@@ -103,6 +102,29 @@ namespace Business.BL.Entities
                 Parameters = new List<SqlParameter>() { new SqlParameter("Id", Id) },
                 Type = TypeCrud.Query
             };
+            QueryGetById.Includes = Include;
+            List<Query> ListSubQuey = new List<Query>();
+            foreach (var item in Include)
+            {
+                Query SubQuery = null;
+                switch (item)
+                {
+                    case "Propietario.Persona":
+                        SubQuery = new Query()
+                        {
+                            RawQuery = "SELECT Id, Nombre, Apellido, Edad, Correo, Estado FROM rrhh.Persona " +
+                                       "WHERE Id = (SELECT PersonaId FROM geo.Propietario WHERE Id = @Id);",
+                            Parameters = new List<SqlParameter>() { new SqlParameter("Id", Id) },
+                            Type = TypeCrud.Query
+                        };
+                        break;
+                    default:
+                        break;
+                }
+                SubQuery.NameInclude = item;
+                ListSubQuey.Add(SubQuery);
+            }
+            QueryGetById.SubQuery = ListSubQuey.ToArray();
 
             return QueryGetById;
         }

@@ -13,15 +13,19 @@ $('body').on('click', 'a.a-redirect', function () {
     window.location = $(this).attr('href');
 });
 
-//$('#div_carga').hide();
-//$(window).ajaxStart(function () {
-//    var $this = $('div#div_carga');
-//    $this.show();
-//});
-//$(window).ajaxStop(function () {
-//    var $this = $('div#div_carga');
-//    $this.hide();
-//});
+$('#loading').hide();
+var fnTimeOut;
+$(window).ajaxStart(function () {
+    var $this = $('div#loading');
+    fnTimeOut = setTimeout(function () {
+        $this.show();
+    }, 500);
+});
+$(window).ajaxStop(function () {
+    var $this = $('div#loading');
+    clearTimeout(fnTimeOut);
+    $this.hide();
+});
 
 //Maneja los errores de las solicitudes
 $(window).ajaxError(function (event, xhr, settings) {

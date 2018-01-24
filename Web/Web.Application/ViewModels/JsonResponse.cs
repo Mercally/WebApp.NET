@@ -11,7 +11,7 @@ namespace Web.Application.ViewModels
         /// Identificador de la respuesta para recibir los diferentes tipos de respuesta y darle tratamiento especificado
         /// desde la carga ajax.
         /// </summary>
-        public string ResponseId { get; set; }
+        public string ResponseId { get; private set; }
         /// <summary>
         /// Determina si la transacción se realizó exitosamente
         /// </summary>
@@ -23,11 +23,11 @@ namespace Web.Application.ViewModels
         /// <summary>
         /// Cadena de mensaje exitoso a mostrar
         /// </summary>
-        public string MessageSuccess { get; set; }
+        public string MessageSuccess { get; private set; }
         /// <summary>
         /// Cadena de mensaje de error a mostrar
         /// </summary>
-        public string MessageError { get; set; }
+        public string MessageError { get; private set; }
         /// <summary>
         /// Url que redireccionará cuando la propiedad IsRedirected es verdadera
         /// </summary>

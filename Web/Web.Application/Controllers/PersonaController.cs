@@ -39,14 +39,10 @@ namespace Web.Application.Controllers
             Transaction Tran = new Transaction("User", PersonaBL.GetAll("Persona.Propietario"));
             Tran.Execute();
 
-            List<Persona> ListPersona;
+            List<Persona> ListPersona = new List<Persona>();
             if (Tran.IsSuccess)
             {
                 ListPersona = PersonaBL.GetData(Query.FindFirst(Tran.ListQuery, 0));
-            }
-            else
-            {
-                ListPersona = new List<Persona>();
             }
             return PartialView(ListPersona);
         }
@@ -61,33 +57,32 @@ namespace Web.Application.Controllers
         public JsonResult Add(Persona Persona)
         {
             JSONResponse = new JsonResponse();
-            if (ModelState.IsValid)
+
+            Transaction Tran = new Transaction("User", PersonaBL.Create(Persona));
+            Tran.Execute();
+            if (Tran.IsSuccess)
             {
-                Transaction Tran = new Transaction("User", PersonaBL.Create(Persona));
-                Tran.Execute();
-                if (Tran.IsSuccess)
+                var Result = Tran.GetQuery(0).Result;
+                JSONResponse.IsSuccess = true;
+                JSONResponse.Modal = new Modal()
                 {
-                    var Result = Tran.GetQuery(0).Result;
-                    JSONResponse.IsSuccess = true;
-                    JSONResponse.Modal = new Modal()
+                    CloseModalId = "AddModal",
+                    OpenModalId = "DetailsModal",
+                    Ajax = new Ajax()
                     {
-                        CloseModalId = "AddModal",
-                        OpenModalId = "DetailsModal",
-                        Ajax = new Ajax()
-                        {
-                            Url = Url.Action("Details", "Persona", new { id = Result.ResultScalar }),
-                            UpdateElementId = "DivForDetails"
-                        }
-                    };
-                    JSONResponse.ListRenderPartialViews.Add(new Ajax()
-                    {
-                        UpdateElementId = "DivForList",
-                        Async = false,
-                        Method = "POST",
-                        Url = Url.Action("List", "Persona", null)
-                    });
-                }
+                        Url = Url.Action("Details", "Persona", new { id = Result.ResultScalar }),
+                        UpdateElementId = "DivForDetails"
+                    }
+                };
+                JSONResponse.ListRenderPartialViews.Add(new Ajax()
+                {
+                    UpdateElementId = "DivForList",
+                    Async = false,
+                    Method = "POST",
+                    Url = Url.Action("List", "Persona", null)
+                });
             }
+
             return Json(JSONResponse);
         }
 
@@ -97,14 +92,10 @@ namespace Web.Application.Controllers
             Transaction Tran = new Transaction("User", PersonaBL.GetById(id));
             Tran.Execute();
 
-            Persona Persona;
+            Persona Persona = null;
             if (Tran.IsSuccess)
             {
                 Persona = PersonaBL.GetData(Query.FindFirst(Tran.ListQuery, 0)).FirstOrDefault();
-            }
-            else
-            {
-                Persona = null;
             }
             return PartialView(Persona);
         }
@@ -115,14 +106,10 @@ namespace Web.Application.Controllers
             Transaction Tran = new Transaction("User", PersonaBL.GetById(id));
             Tran.Execute();
 
-            Persona Persona;
+            Persona Persona = null;
             if (Tran.IsSuccess)
             {
                 Persona = PersonaBL.GetData(Query.FindFirst(Tran.ListQuery, 0)).FirstOrDefault();
-            }
-            else
-            {
-                Persona = null;
             }
             return PartialView(Persona);
         }
@@ -149,7 +136,6 @@ namespace Web.Application.Controllers
                     Url = Url.Action("List", "Persona", null)
                 });
             }
-
             return Json(JSONResponse);
         }
 
@@ -159,14 +145,10 @@ namespace Web.Application.Controllers
             Transaction Tran = new Transaction("User", PersonaBL.GetById(id));
             Tran.Execute();
 
-            Persona Persona;
+            Persona Persona = null;
             if (Tran.IsSuccess)
             {
                 Persona = PersonaBL.GetData(Query.FindFirst(Tran.ListQuery, 0)).FirstOrDefault();
-            }
-            else
-            {
-                Persona = null;
             }
             return PartialView(Persona);
         }
@@ -175,32 +157,30 @@ namespace Web.Application.Controllers
         public JsonResult Edit(Persona Persona, string btnSubmit = null)
         {
             JSONResponse = new JsonResponse();
-            if (ModelState.IsValid)
+
+            Transaction Tran = new Transaction("User", PersonaBL.Update(Persona));
+            Tran.Execute();
+            if (Tran.IsSuccess)
             {
-                Transaction Tran = new Transaction("User", PersonaBL.Update(Persona));
-                Tran.Execute();
-                if (Tran.IsSuccess)
+                JSONResponse.IsSuccess = true;
+                JSONResponse.BtnSubmitId = btnSubmit;
+                JSONResponse.Modal = new Modal()
                 {
-                    JSONResponse.IsSuccess = true;
-                    JSONResponse.BtnSubmitId = btnSubmit;
-                    JSONResponse.Modal = new Modal()
+                    CloseModalId = "EditModal",
+                    OpenModalId = "DetailsModal",
+                    Ajax = new Ajax()
                     {
-                        CloseModalId = "EditModal",
-                        OpenModalId = "DetailsModal",
-                        Ajax = new Ajax()
-                        {
-                            UpdateElementId = "DivForDetails",
-                            Url = Url.Action("Details", "Persona", new { id = Persona.Id })
-                        }
-                    };
-                    JSONResponse.ListRenderPartialViews.Add(new Ajax()
-                    {
-                        UpdateElementId = "DivForList",
-                        Async = false,
-                        Method = "POST",
-                        Url = Url.Action("List", "Persona", null)
-                    });
-                }
+                        UpdateElementId = "DivForDetails",
+                        Url = Url.Action("Details", "Persona", new { id = Persona.Id })
+                    }
+                };
+                JSONResponse.ListRenderPartialViews.Add(new Ajax()
+                {
+                    UpdateElementId = "DivForList",
+                    Async = false,
+                    Method = "POST",
+                    Url = Url.Action("List", "Persona", null)
+                });
             }
             return Json(JSONResponse);
         }
