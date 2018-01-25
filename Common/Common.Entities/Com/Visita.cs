@@ -14,5 +14,6 @@ namespace Common.Entities.Com
         public bool EsActivo { get; set; }
 
         public Catalogo Estado { get; set; }
+        public Boleta Boleta { get; set; }
     }
 }

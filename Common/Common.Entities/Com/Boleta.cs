@@ -30,5 +30,6 @@ namespace Common.Entities.Com
         public Cliente Cliente { get; set; }
         public Usuario Usuario { get; set; }
         public Catalogo Departamento { get; set; }
+        public List<Visita> Visitas { get; set; }
     }
 }
