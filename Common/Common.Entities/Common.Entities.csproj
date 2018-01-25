@@ -47,9 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cat\Catalogo.cs" />
+    <Compile Include="Com\Boleta.cs" />
+    <Compile Include="Com\Visita.cs" />
+    <Compile Include="Neg\Cliente.cs" />
+    <Compile Include="Neg\Proyecto.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Propietario.cs" />
+    <Compile Include="Seg\Usuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Web\Web.Custom\Web.Custom.csproj">

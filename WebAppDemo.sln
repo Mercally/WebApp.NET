@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{F20A43DF-8DD7-4F0E-8018-DCFF7E669032}"
 EndProject
@@ -32,6 +32,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Application.Test", "Testing\Web.Application.Test\Web.Application.Test.csproj", "{141F96A3-A37E-407F-AB24-27445D46449D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Custom", "Web\Web.Custom\Web.Custom.csproj", "{D233B954-960A-4184-86B9-4F6B38E1CB59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBase", "DataBase", "{24ED66E9-A019-4A35-B3EF-A48DB8883F6F}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Users\Josue\Desktop\TimeManager.sql = ..\..\..\Users\Josue\Desktop\TimeManager.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
