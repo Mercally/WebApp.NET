@@ -158,7 +158,8 @@ C:\Source\GitHub\WebApp.NET\Web\Web.Application\bin\System.Web.Webpages.Razor.xm
 C:\Source\GitHub\WebApp.NET\Web\Web.Application\bin\System.Web.Helpers.xml
 C:\Source\GitHub\WebApp.NET\Web\Web.Application\bin\System.Web.Mvc.xml
 C:\Source\GitHub\WebApp.NET\Web\Web.Application\bin\Data.DAL.pdb
-C:\Source\GitHub\WebApp.NET\Web\Web.Application\obj\Debug\Web.Application.csprojResolveAssemblyReference.cache
 C:\Source\GitHub\WebApp.NET\Web\Web.Application\obj\Debug\Web.Application.csproj.CoreCompileInputs.cache
 C:\Source\GitHub\WebApp.NET\Web\Web.Application\obj\Debug\Web.Application.dll
 C:\Source\GitHub\WebApp.NET\Web\Web.Application\obj\Debug\Web.Application.pdb
+C:\Source\GitHub\WebApp.NET\Web\Web.Application\obj\Debug\Web.Application.csprojAssemblyReference.cache
+C:\Source\GitHub\WebApp.NET\Web\Web.Application\obj\Debug\Web.Application.csproj.CopyComplete

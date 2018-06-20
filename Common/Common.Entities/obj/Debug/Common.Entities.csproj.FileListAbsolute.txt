@@ -32,7 +32,8 @@ C:\Source\GitHub\WebApp.NET\Common\Common.Entities\bin\Debug\System.Web.Mvc.dll
 C:\Source\GitHub\WebApp.NET\Common\Common.Entities\bin\Debug\Web.Custom.dll
 C:\Source\GitHub\WebApp.NET\Common\Common.Entities\bin\Debug\Web.Custom.pdb
 C:\Source\GitHub\WebApp.NET\Common\Common.Entities\bin\Debug\System.Web.Mvc.xml
-C:\Source\GitHub\WebApp.NET\Common\Common.Entities\obj\Debug\Common.Entities.csprojResolveAssemblyReference.cache
 C:\Source\GitHub\WebApp.NET\Common\Common.Entities\obj\Debug\Common.Entities.csproj.CoreCompileInputs.cache
 C:\Source\GitHub\WebApp.NET\Common\Common.Entities\obj\Debug\Common.Entities.dll
 C:\Source\GitHub\WebApp.NET\Common\Common.Entities\obj\Debug\Common.Entities.pdb
+C:\Source\GitHub\WebApp.NET\Common\Common.Entities\obj\Debug\Common.Entities.csprojAssemblyReference.cache
+C:\Source\GitHub\WebApp.NET\Common\Common.Entities\obj\Debug\Common.Entities.csproj.CopyComplete

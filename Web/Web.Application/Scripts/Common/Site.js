@@ -121,8 +121,8 @@ function HandlerResponseCommon(response){
         alertify.notify('Ocurrió un error al guardar los datos', 'error', 5, function () { /*console.log('dismissed');*/ });
         submitForm = false;
     }
-    if (response.Modal != null) {
-        if (response.Modal.Ajax != null) {
+    if (response.Modal) {
+        if (response.Modal.Ajax) {
             $.ajax({
                 method: response.Modal.Ajax.Method,
                 url: response.Modal.Ajax.Url,
@@ -137,14 +137,14 @@ function HandlerResponseCommon(response){
                 }
             });
         }
-        if (response.Modal.CloseModalId != null) {
+        if (response.Modal.CloseModalId) {
             $('#' + response.Modal.CloseModalId).modal('hide');
         }
-        if (response.Modal.OpenModalId != null) {
+        if (response.Modal.OpenModalId) {
             $('#' + response.Modal.OpenModalId).modal('show');
         }
     }
-    if (response.ListRenderPartialViews != null) {
+    if (response.ListRenderPartialViews) {
         if (response.ListRenderPartialViews.length > 0) {
             for (var i = 0; i < response.ListRenderPartialViews.length; i++) {
                 var Ajax = response.ListRenderPartialViews[i];
@@ -207,13 +207,13 @@ function PartialAction(url, updateElementId, modalIdOpen, modalIdClose, method){
         async: true,
         success: function (response) {
             $('#' + updateElementId).html(response);
-            if (modalIdOpen != null) {
+            if (modalIdOpen) {
                 $('#' + modalIdOpen).modal('show');
                 AttachConfirm();
             }
         }
     });
-    if (modalIdClose != null) {
+    if (modalIdClose) {
         $('#' + modalIdClose).modal('hide');
     }
 }

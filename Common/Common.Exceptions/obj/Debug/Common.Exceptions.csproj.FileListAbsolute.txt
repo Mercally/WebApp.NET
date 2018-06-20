@@ -21,4 +21,4 @@ C:\Source\GitHub\WebApp.NET\Common\Common.Exceptions\bin\Debug\Common.Exceptions
 C:\Source\GitHub\WebApp.NET\Common\Common.Exceptions\obj\Debug\Common.Exceptions.csproj.CoreCompileInputs.cache
 C:\Source\GitHub\WebApp.NET\Common\Common.Exceptions\obj\Debug\Common.Exceptions.dll
 C:\Source\GitHub\WebApp.NET\Common\Common.Exceptions\obj\Debug\Common.Exceptions.pdb
-C:\Source\GitHub\WebApp.NET\Common\Common.Exceptions\obj\Debug\Common.Exceptions.csprojResolveAssemblyReference.cache
+C:\Source\GitHub\WebApp.NET\Common\Common.Exceptions\obj\Debug\Common.Exceptions.csprojAssemblyReference.cache

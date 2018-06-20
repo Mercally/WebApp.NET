@@ -28,4 +28,5 @@ C:\Source\GitHub\WebApp.NET\Web\Web.Custom\bin\Debug\System.Web.Razor.xml
 C:\Source\GitHub\WebApp.NET\Web\Web.Custom\bin\Debug\System.Web.WebPages.xml
 C:\Source\GitHub\WebApp.NET\Web\Web.Custom\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Source\GitHub\WebApp.NET\Web\Web.Custom\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Source\GitHub\WebApp.NET\Web\Web.Custom\obj\Debug\Web.Custom.csprojResolveAssemblyReference.cache
+C:\Source\GitHub\WebApp.NET\Web\Web.Custom\obj\Debug\Web.Custom.csprojAssemblyReference.cache
+C:\Source\GitHub\WebApp.NET\Web\Web.Custom\obj\Debug\Web.Custom.csproj.CopyComplete
